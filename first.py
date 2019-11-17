@@ -5,12 +5,13 @@ from PyQt5 import uic
 import sys
 import random
 import math
+import UI
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, UI.Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        super().setupUi(self)
         self.pushButton.clicked.connect(self.run)
         self.all = []
 
