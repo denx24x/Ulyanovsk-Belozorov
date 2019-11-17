@@ -18,10 +18,11 @@ class MyWidget(QMainWindow):
         x, y = random.randint(0, self.width()), random.randint(0, self.height())
         r = random.randint(1, 50)
         imgres = QImage(2 * r, 2 * r, QImage.Format_ARGB32)
+        clr = QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         for i in range(2 * r):
             for g in range(2 * r):
                 if math.sqrt((r - i) ** 2 + (r - g) ** 2) <= r:
-                    imgres.setPixel(i, g, QColor(255, 255, 0).rgba())
+                    imgres.setPixel(i, g, clr.rgba())
                 else:
                     imgres.setPixel(i, g, QColor(0, 0, 0, 0).rgba())
         pixmap = QPixmap.fromImage(imgres)
