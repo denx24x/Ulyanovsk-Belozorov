@@ -6,26 +6,48 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
-    <height>568</height>
+    <width>526</width>
+    <height>502</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>490</y>
-      <width>371</width>
-      <height>41</height>
+      <x>10</x>
+      <y>10</y>
+      <width>511</width>
+      <height>451</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
-    </property>
+    <column>
+     <property name="text">
+      <string>id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>title</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>year</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>genre</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>duration</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -33,7 +55,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>410</width>
+     <width>526</width>
      <height>21</height>
     </rect>
    </property>
