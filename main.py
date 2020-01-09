@@ -1,14 +1,15 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QDialog
-from PyQt5 import uic
+import UI.main
+import UI.addEditCoffeeForm
 import sqlite3
 import sys
 
 
-class AddEdit(QDialog):
+class AddEdit(QDialog, UI.addEditCoffeeForm.Ui_Dialog):
     def __init__(self):
         super().__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
-        con = sqlite3.connect("coffee.sqlite")
+        super().setupUi(self)
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.execute("""select * from Coffee""")
         self.tableWidget.setColumnCount(len(cur.description) - 1)
         self.tableWidget.setHorizontalHeaderLabels([i[0] for i in cur.description[1:]])
@@ -16,11 +17,11 @@ class AddEdit(QDialog):
         con.close()
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, UI.main.Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
-        con = sqlite3.connect("coffee.sqlite")
+        super().setupUi(self)
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.execute("""select * from Coffee""")
         self.tableWidget.setColumnCount(len(cur.description))
         self.tableWidget.setHorizontalHeaderLabels([i[0] for i in cur.description])
@@ -31,7 +32,7 @@ class Example(QMainWindow):
         self.run()
 
     def run(self):
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.cursor()
         try:
             result = cur.execute("""select * from Coffee""").fetchall()
@@ -45,7 +46,7 @@ class Example(QMainWindow):
         con.close()
 
     def load_ids(self):
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         self.ids = [i[0] for i in con.execute('''select id from Coffee''').fetchall()]
         con.close()
 
@@ -54,7 +55,7 @@ class Example(QMainWindow):
             id = int(self.lineEdit.text())
         except Exception:
             return
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         ask = AddEdit()
         if id in self.ids:
             bf = con.execute('''select * from Coffee where id = ?''', (id, )).fetchall()[0][1:]
@@ -81,7 +82,7 @@ class Example(QMainWindow):
             id = int(self.lineEdit.text())
         except Exception:
             return
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         con.execute('''delete from Coffee where id = ?''', (id,))
         con.commit()
         self.load_ids()
